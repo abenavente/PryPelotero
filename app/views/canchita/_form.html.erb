@@ -1,0 +1,29 @@
+<%= form_for(@canchitum) do |f| %>
+  <% if @canchitum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@canchitum.errors.count, "error") %> prohibited this canchitum from being saved:</h2>
+
+      <ul>
+      <% @canchitum.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :local %><br />
+    <%= f.text_field :local %>
+  </div>
+  <div class="field">
+    <%= f.label :max_players %><br />
+    <%= f.number_field :max_players %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
