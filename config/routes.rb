@@ -4,13 +4,15 @@ PryPelotero::Application.routes.draw do
   #get "powner/index"
 
   resources :canchita
-
+  resources :powner
   resources :locals
   devise_for :models
   devise_for :owners, :path => "usuarios", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'cmon_let_me_in' }
   
   match '/powners' => "powner#index", as: :owner_root
+  match "canchitad/:id" => "canchita#index", :as =>'canchitad'
 
+  root :to => 'powner#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

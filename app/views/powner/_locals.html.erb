@@ -1,29 +1,30 @@
-<h1>Tus locales</h1>
-
+<div id="product_list" >
+<h1>Tus Locales</h1>
 <table>
-  <tr>
-    <th>Name</th>
-    <th>Address</th>
-    <th>District</th>
-    <th>Owner</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @locals.each do |local| %>
-  <tr>
-    <td><%= local.name %></td>
-    <td><%= local.address %></td>
-    <td><%= local.district %></td>
-    <td><%= local.owner %></td>
-    <td><%= link_to 'Show', local %></td>
-    <td><%= link_to 'Edit', edit_local_path(local) %></td>
-    <td><%= link_to 'Destroy', local, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<tr class="<%= cycle('list_line_odd', 'list_line_even') %>" >
+<td>
+<%= image_tag(local.image_url, :class => 'list_image') %>
+</td>
+<td class="list_description" >
+<dl>
+<dt><h3><%= local.name %><h3></dt>
+<dd><%= truncate(strip_tags(local.address),
+:length => 80) %></dd>
+</dl>
+</td>
+<td class="list_actions" >
+<%= link_to 'Mostrar', local %><br/>
+<%= link_to 'Editar', edit_local_path(local) %><br/>
+<%= link_to 'Canchitas', canchitad_path(local) %><br/>
+<%= link_to 'Elimiar', local,
+:confirm => '¿Estas seguro?',
+:method => :delete %>
+</td>
+</tr>
 <% end %>
 </table>
-
+</div>
 <br />
 
-<%= link_to 'New Local', new_local_path %>
+<%= link_to 'Nuevo Local', new_local_path %>

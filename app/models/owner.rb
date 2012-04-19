@@ -9,7 +9,7 @@ class Owner < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   
-  	def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(resource)
   		'www.google.com' # Note presence of 'resource'
 	end
 

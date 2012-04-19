@@ -4,14 +4,18 @@ class CanchitaController < ApplicationController
   # GET /canchita.json
   def index
     #@canchita = Canchitum.where(:owner_id => current_owner)
+    if params[:id].nil? 
     @canchita = Canchitum.joins(:local).where('locals.owner_id' => current_owner)
+    else
+    @canchita = Canchitum.where('local_id' => params[:id])  
+    end
+
     #@canchita = Canchitum.find_by_sql("SELECT * FROM canchita  INNER JOIN locals ON locals.id = canchita.local_id  ")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @canchita }
     end
   end
-
   # GET /canchita/1
   # GET /canchita/1.json
   def show

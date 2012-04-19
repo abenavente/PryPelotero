@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120418165622) do
+ActiveRecord::Schema.define(:version => 20120419220132) do
 
   create_table "canchita", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20120418165622) do
     t.integer  "max_players"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "image_url"
   end
 
   add_index "canchita", ["local_id"], :name => "index_canchita_on_local_id"
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20120418165622) do
     t.integer  "owner_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "image_url"
   end
 
   add_index "locals", ["owner_id"], :name => "index_locals_on_owner_id"
