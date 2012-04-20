@@ -26,9 +26,20 @@
       <h1 id="title">Pelotero</h1>
       <nav>
         <ul>
-          <li><a href="#">Ingreso</a></li>
-          <li><a href="#">Registro</a></li>
-          <li><a href="#">Contacto</a></li>
+          <li>
+           <% if owner_signed_in? %>
+            <%= link_to "Salir", destroy_owner_session_path, :method => :delete %>
+           <% else %>
+            <% if player_signed_in? %>
+              <%= link_to "Salir", destroy_player_session_path, :method => :delete %>
+            <% else %>
+              <%= link_to 'Ingresar', panelPelotero_path %>
+            <% end %>
+          <% end %>
+          
+          </li>
+          <li><%= link_to "Crear Cuenta", new_player_registration_path %> </li>
+          <li><a href="#">Canchitas</a></li>
 
         </ul>
       </nav>
@@ -38,25 +49,26 @@
   <div id="main-container">
     <div id="main" class="wrapper clearfix">
       <article>
-  <div id="user_nav">
-  <% if owner_signed_in? %>
-    Conectado como <%= current_owner.email %>. ¿No eres tu?
-    <%= link_to "Salir", destroy_owner_session_path, :method => :delete %>
-  <% else %>
-    <%= link_to "Crear Cuenta", new_owner_registration_path %> or <%= link_to "Ingresar", new_owner_session_path %>
-  <% end %>
-</div>
+  
 </article>
      
-      
+      <article>
     <%= yield %>
-      
-      
-     <%= render 'sideOwner' %> 
+      </article>
+      <% if owner_signed_in? %>
+        <%= render :partial => "/home/sideOwner" %> 
+      <% else %>
+        <% if player_signed_in? %>
+          <%= render :partial => "/home/sidePelotero" %> 
+        <% else %>
+          <%= render :partial => "/home/sidePublico" %> 
+        <% end %>   
+      <% end %>
       
     </div> <!-- #main -->
   </div> <!-- #main-container -->
 
+     
   <div id="footer-container">
     <footer class="wrapper">
       <h3>footer</h3>

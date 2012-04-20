@@ -1,18 +1,32 @@
 PryPelotero::Application.routes.draw do
   
+  get "pplayer/index"
+
+  devise_for :players
+
+  get "home/index"
+
   #get 'pwoners' => 'powner#index'
   #get "powner/index"
 
   resources :canchita
   resources :powner
   resources :locals
+  resources :pplayer
+
   devise_for :models
   devise_for :owners, :path => "usuarios", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'cmon_let_me_in' }
+  devise_for :players, :path => "peloteros", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'cmon_let_me_in' }
   
-  match '/powners' => "powner#index", as: :owner_root
+  match '/powner' => "powner#index", as: :owner_root
+  match '/pplayer' => "pplayer#index", as: :player_root
+  
   match "canchitad/:id" => "canchita#index", :as =>'canchitad'
+  match "panelAsociado" => "powner#index"
+  match "panelPelotero" => "pplayer#index"
+  
+  root :to => 'home#index'
 
-  root :to => 'powner#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
